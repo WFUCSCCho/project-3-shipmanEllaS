@@ -119,12 +119,6 @@ public class Proj3 {
         return (right-1);
     }
 
-    static <T> void swap(ArrayList<T> a, int i, int j) {
-        T temp = a.get(i);
-        a.set(i, a.get(j));
-        a.set(j, temp);
-    }
-
     // Heap Sort
     public static <T extends Comparable> void heapSort(ArrayList<T> a) {
         if (a.isEmpty() || a.size() ==1) {     //return if a is empty or a singleton set
@@ -164,7 +158,7 @@ public class Proj3 {
         }
     }
 
-    // Bubble Sort
+    // Bubble Sort, returns number of swaps performed
     public static <T extends Comparable> int bubbleSort(ArrayList<T> a, int size) {
         int swaps = 0;              //number of swaps made during sorting
         boolean swapped = false;    //tracks whether items in the list have been swapped
@@ -185,7 +179,7 @@ public class Proj3 {
         return swaps;
     }
 
-    // Odd-Even Transposition Sort
+    // Odd-Even Transposition Sort, returns number of swaps performed
     public static <T extends Comparable> int transpositionSort(ArrayList<T> a, int size) {
         // Finish Me
         boolean isSorted = false;       //tracks if list is sorted
@@ -193,14 +187,14 @@ public class Proj3 {
 
         while (!isSorted) {
             isSorted = true;        //if there are no elements out of order, exits loop after running both for loops
-            for (int i = 0; i < size-1; i = i +2) {     //Sort even indices (via, essentially, bubble sort)
+            for (int i = 0; i < size-1; i = i + 2) {     //Sort even indices (via, essentially, bubble sort)
                 if (a.get(i).compareTo(a.get(i+1)) > 0) {       //if next element is smaller, swap
                     swap(a, i, i+1);
                     swaps++;        //update swaps
                     isSorted = false;
                 }
             }
-            for (int i = 1; i < size-1; i = i +2) {     //Sort odd indicies (via, essentially, bubble sort)
+            for (int i = 1; i < size-1; i = i + 2) {     //Sort odd indicies (via, essentially, bubble sort)
                 if (a.get(i).compareTo(a.get(i+1)) > 0) {       //if next element is smaller, swap
                     swap(a, i, i+1);
                     swaps++;        //update swaps
@@ -213,6 +207,14 @@ public class Proj3 {
         return swaps;
     }
 
+    //Swaps elements in arraylist a
+    static <T> void swap(ArrayList<T> a, int i, int j) {
+        T temp = a.get(i);
+        a.set(i, a.get(j));
+        a.set(j, temp);
+    }
+
+    //Prints list to the console
     public static <T extends Comparable> void printList(ArrayList<T> a) {
         for (int i = 0; i < a.size(); i++) {
             System.out.print(a.get(i) + ", ");
@@ -220,6 +222,7 @@ public class Proj3 {
         System.out.println();
     }
 
+    //Prints list in a file given a filewriter
     public static <T extends Comparable> void printListInFile(FileWriter writer, ArrayList<T> a) {
         try {
             for (int i = 0; i < a.size(); i++) {
@@ -231,6 +234,8 @@ public class Proj3 {
         }
     }
 
+
+    //Main method
     public static void main(String [] args)  throws IOException {
         // Use command line arguments to specify the input file
         if (args.length != 3) {
